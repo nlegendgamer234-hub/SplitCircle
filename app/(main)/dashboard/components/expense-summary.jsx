@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 export function ExpenseSummary({ monthlySpending, totalSpent }) {
+  // Format monthly data for chart
   const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
   const chartData =
@@ -15,6 +16,7 @@ export function ExpenseSummary({ monthlySpending, totalSpent }) {
       };
     }) || [];
 
+  // Get current year
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth();
 

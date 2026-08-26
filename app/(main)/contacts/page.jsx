@@ -69,29 +69,26 @@ export default function ContactsPage() {
             </Card>
           ) : (
             <div className="flex flex-col gap-4">
-              {users.map((user) => {
-                const userId = user._id || user.id;
-                return (
-                  <Link key={userId} href={`/person/${userId}`}>
-                    <Card className="hover:bg-muted/30 transition-colors cursor-pointer">
-                      <CardContent className="py-4">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-3">
-                            <Avatar className="h-10 w-10">
-                              <AvatarImage src={user.imageUrl} />
-                              <AvatarFallback>{user.name?.charAt(0) || "?"}</AvatarFallback>
-                            </Avatar>
-                            <div>
-                              <p className="font-medium">{user.name}</p>
-                              <p className="text-sm text-muted-foreground">{user.email}</p>
-                            </div>
+              {users.map((user) => (
+                <Link key={user.id} href={`/person/${user.id}`}>
+                  <Card className="hover:bg-muted/30 transition-colors cursor-pointer">
+                    <CardContent className="py-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <Avatar className="h-10 w-10">
+                            <AvatarImage src={user.imageUrl} />
+                            <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <p className="font-medium">{user.name}</p>
+                            <p className="text-sm text-muted-foreground">{user.email}</p>
                           </div>
                         </div>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                );
-              })}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
             </div>
           )}
         </div>
@@ -108,28 +105,25 @@ export default function ContactsPage() {
             </Card>
           ) : (
             <div className="flex flex-col gap-4">
-              {groups.map((group) => {
-                const groupId = group._id || group.id;
-                return (
-                  <Link key={groupId} href={`/groups/${groupId}`}>
-                    <Card className="hover:bg-muted/30 transition-colors cursor-pointer">
-                      <CardContent className="py-4">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-3">
-                            <div className="bg-primary/10 p-2 rounded-md">
-                              <Users className="h-6 w-6 text-primary" />
-                            </div>
-                            <div>
-                              <p className="font-medium">{group.name}</p>
-                              <p className="text-sm text-muted-foreground">{group.memberCount} members</p>
-                            </div>
+              {groups.map((group) => (
+                <Link key={group.id} href={`/groups/${group.id}`}>
+                  <Card className="hover:bg-muted/30 transition-colors cursor-pointer">
+                    <CardContent className="py-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="bg-primary/10 p-2 rounded-md">
+                            <Users className="h-6 w-6 text-primary" />
+                          </div>
+                          <div>
+                            <p className="font-medium">{group.name}</p>
+                            <p className="text-sm text-muted-foreground">{group.memberCount} members</p>
                           </div>
                         </div>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                );
-              })}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
             </div>
           )}
         </div>

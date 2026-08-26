@@ -14,6 +14,7 @@ export function GroupList({ groups }) {
   return (
     <div className="space-y-3">
       {groups.map((group) => {
+        // Calculate total balance in the group
         const balance = group.balance || 0;
         const hasBalance = balance !== 0;
 
