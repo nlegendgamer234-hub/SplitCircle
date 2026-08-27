@@ -46,10 +46,12 @@ export function CreateGroupModal({ isOpen, onClose, onSuccess }) {
   });
 
   const addMember = (user) => {
-    if (!selectedMembers.some((m) => m.id === user.id)) {
+    // Prevent adding self or duplicates
+    if (currentUser?._id !== user.id && !selectedMembers.some((m) => m.id === user.id)) {
       setSelectedMembers([...selectedMembers, user]);
     }
     setCommandOpen(false);
+    setSearchQuery("");
   };
 
   const removeMember = (userId) => {
@@ -58,8 +60,8 @@ export function CreateGroupModal({ isOpen, onClose, onSuccess }) {
 
   const onSubmit = async (data) => {
     try {
-      // Extract member IDs
-      const memberIds = selectedMembers.map((member) => member.id);
+      // Extract selected member IDs + current user ID
+      const memberIds = [...(currentUser?._id ? [currentUser._id] : []), ...selectedMembers.map((member) => member.id)];
 
       // Create the group
       const groupId = await createGroup.mutate({
@@ -139,12 +141,16 @@ export function CreateGroupModal({ isOpen, onClose, onSuccess }) {
               {/* Add member button with dropdown */}
               <Popover open={commandOpen} onOpenChange={setCommandOpen}>
                 <PopoverTrigger asChild>
-                  <Button type="button" variant="outline" size="sm" className="h-8 gap-1 text-xs">
-                    <UserPlus className="h-3.5 w-3.5" />
-                    Add member
+                  <Button variant="outline" type="button" className="w-full justify-center gap-2 mt-2">
+                    <span className="flex items-center gap-2">
+                      <UserPlus className="h-4 w-4" />
+                      Add member
+                    </span>
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="p-0" align="start" side="bottom">
+
+                {/* Wrapped Command in PopoverContent */}
+                <PopoverContent className="p-0" align="start">
                   <Command>
                     <CommandInput placeholder="Search by name or email..." value={searchQuery} onValueChange={setSearchQuery} />
                     <CommandList>

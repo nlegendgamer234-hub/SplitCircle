@@ -22,19 +22,21 @@ export default function LandingPage() {
           <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed">Track shared expenses, split bills effortlessly, and settle up quickly. Never worry about who owes who again.</p>
 
           <div className="flex flex-col items-center gap-4 sm:flex-row justify-center">
-            <Link href="/dashboard" className="inline-flex h-11 items-center justify-center rounded-md bg-green-600 px-8 text-sm font-medium text-white transition-colors hover:bg-green-700">
-              Get Started
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-            <Link href="#how-it-works" className="inline-flex h-11 items-center justify-center rounded-md border border-green-600 px-8 text-sm font-medium text-green-600 transition-colors hover:bg-green-50">
-              See How It Works
-            </Link>
+            <Button asChild size="lg" className="bg-green-600 hover:bg-green-700">
+              <Link href="/dashboard">
+                Get Started
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="border-green-600 text-green-600 hover:bg-green-50">
+              <Link href="#how-it-works">See How It Works</Link>
+            </Button>
           </div>
         </div>
 
         <div className="container mx-auto max-w-5xl overflow-hidden rounded-xl shadow-xl">
           <div className="gradient p-1 aspect-[16/9]">
-            <Image src="/hero.png" width={1280} height={720} alt="Banner" className="rounded-lg mx-auto" priority />
+            <Image src="/hero1.png" width={1280} height={720} alt="Banner" className="rounded-lg mx-auto" priority />
           </div>
         </div>
       </section>
@@ -98,9 +100,9 @@ export default function LandingPage() {
                 <CardContent className="space-y-4 p-6">
                   <p className="text-gray-500">{quote}</p>
                   <div className="flex items-center space-x-3">
-                    <Avatar>
+                    <Avatar className="h-10 w-10">
                       {/* Placeholder avatar */}
-                      <AvatarImage src={image} alt={name} />
+                      <AvatarImage src={image} alt={name} className={undefined} />
                       <AvatarFallback className="uppercase">{name.charAt(0)}</AvatarFallback>
                     </Avatar>
                     <div className="text-left">
@@ -120,10 +122,12 @@ export default function LandingPage() {
         <div className="container mx-auto px-4 md:px-6 text-center space-y-6">
           <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl text-white">Ready to simplify expense sharing?</h2>
           <p className="mx-auto max-w-[600px] text-green-100 md:text-xl/relaxed">Join thousands of users who have made splitting expenses stress‑free.</p>
-          <Link href="/dashboard" className="inline-flex h-11 items-center justify-center rounded-md bg-green-800 px-8 text-sm font-medium text-white transition-opacity hover:opacity-90">
-            Get Started
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
+          <Button asChild size="lg" className="bg-green-800 hover:opacity-90">
+            <Link href="/dashboard">
+              Get Started
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
         </div>
       </section>
 

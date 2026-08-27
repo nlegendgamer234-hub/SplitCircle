@@ -9,6 +9,7 @@ import { useConvexMutation, useConvexQuery } from "@/hooks/use-convex-query";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { ParticipantSelector } from "./participant-selector";
 import { GroupSelector } from "./group-selector";
@@ -45,6 +46,7 @@ export function ExpenseForm({ type = "individual", onSuccess }) {
 
   // Mutations and queries
   const { data: currentUser } = useConvexQuery(api.users.getCurrentUser);
+
   const createExpense = useConvexMutation(api.expenses.createExpense);
   const categories = getAllCategories();
 
@@ -72,7 +74,6 @@ export function ExpenseForm({ type = "individual", onSuccess }) {
   // Watch for changes
   const amountValue = watch("amount");
   const paidByUserId = watch("paidByUserId");
-  const splitType = watch("splitType");
 
   // When a user is added or removed, update the participant list
   useEffect(() => {
@@ -202,11 +203,14 @@ export function ExpenseForm({ type = "individual", onSuccess }) {
             <Label>Group</Label>
             <GroupSelector
               onChange={(group) => {
+                // Only update if the group has changed to prevent loops
                 if (!selectedGroup || selectedGroup.id !== group.id) {
                   setSelectedGroup(group);
                   setValue("groupId", group.id);
 
+                  // Update participants with the group members
                   if (group.members && Array.isArray(group.members)) {
+                    // Set the participants once, don't re-set if they're the same
                     setParticipants(group.members);
                   }
                 }
@@ -239,99 +243,50 @@ export function ExpenseForm({ type = "individual", onSuccess }) {
           {errors.paidByUserId && <p className="text-sm text-red-500">{errors.paidByUserId.message}</p>}
         </div>
 
-        {/* Split type selector */}
-        <div className="space-y-4">
+        {/* Split type */}
+        <div className="space-y-2">
           <Label>Split type</Label>
-
-          {/* Tabs header container */}
-          <div
-            style={{
-              display: "flex",
-              width: "100%",
-              backgroundColor: "#f1f5f9",
-              padding: "4px",
-              borderRadius: "8px",
-              height: "44px",
-              boxSizing: "border-box",
-            }}>
-            <button
-              type="button"
-              onClick={() => setValue("splitType", "equal")}
-              style={{
-                flex: 1,
-                height: "36px",
-                fontSize: "14px",
-                fontWeight: 500,
-                borderRadius: "6px",
-                border: "none",
-                cursor: "pointer",
-                backgroundColor: splitType === "equal" ? "#ffffff" : "transparent",
-                color: splitType === "equal" ? "#000000" : "#64748b",
-                boxShadow: splitType === "equal" ? "0 1px 3px rgba(0,0,0,0.1)" : "none",
-              }}>
-              Equal
-            </button>
-            <button
-              type="button"
-              onClick={() => setValue("splitType", "percentage")}
-              style={{
-                flex: 1,
-                height: "36px",
-                fontSize: "14px",
-                fontWeight: 500,
-                borderRadius: "6px",
-                border: "none",
-                cursor: "pointer",
-                backgroundColor: splitType === "percentage" ? "#ffffff" : "transparent",
-                color: splitType === "percentage" ? "#000000" : "#64748b",
-                boxShadow: splitType === "percentage" ? "0 1px 3px rgba(0,0,0,0.1)" : "none",
-              }}>
-              Percentage
-            </button>
-            <button
-              type="button"
-              onClick={() => setValue("splitType", "exact")}
-              style={{
-                flex: 1,
-                height: "36px",
-                fontSize: "14px",
-                fontWeight: 500,
-                borderRadius: "6px",
-                border: "none",
-                cursor: "pointer",
-                backgroundColor: splitType === "exact" ? "#ffffff" : "transparent",
-                color: splitType === "exact" ? "#000000" : "#64748b",
-                boxShadow: splitType === "exact" ? "0 1px 3px rgba(0,0,0,0.1)" : "none",
-              }}>
-              Exact Amounts
-            </button>
-          </div>
-
-          {/* Dynamic tab contents */}
-          {splitType === "equal" && (
-            <div className="pt-2 space-y-2">
+          <Tabs defaultValue="equal" onValueChange={(value) => setValue("splitType", value)}>
+            <TabsList className="grid w-full grid-cols-3">
+              <TabsTrigger value="equal">Equal</TabsTrigger>
+              <TabsTrigger value="percentage">Percentage</TabsTrigger>
+              <TabsTrigger value="exact">Exact Amounts</TabsTrigger>
+            </TabsList>
+            <TabsContent value="equal" className="pt-4">
               <p className="text-sm text-muted-foreground">Split equally among all participants</p>
-              <SplitSelector type="equal" amount={parseFloat(amountValue) || 0} participants={participants} paidByUserId={paidByUserId} onSplitsChange={setSplits} />
-            </div>
-          )}
-
-          {splitType === "percentage" && (
-            <div className="pt-2 space-y-2">
+              <SplitSelector
+                type="equal"
+                amount={parseFloat(amountValue) || 0}
+                participants={participants}
+                paidByUserId={paidByUserId}
+                onSplitsChange={setSplits} // Use setSplits directly
+              />
+            </TabsContent>
+            <TabsContent value="percentage" className="pt-4">
               <p className="text-sm text-muted-foreground">Split by percentage</p>
-              <SplitSelector type="percentage" amount={parseFloat(amountValue) || 0} participants={participants} paidByUserId={paidByUserId} onSplitsChange={setSplits} />
-            </div>
-          )}
-
-          {splitType === "exact" && (
-            <div className="pt-2 space-y-2">
+              <SplitSelector
+                type="percentage"
+                amount={parseFloat(amountValue) || 0}
+                participants={participants}
+                paidByUserId={paidByUserId}
+                onSplitsChange={setSplits} // Use setSplits directly
+              />
+            </TabsContent>
+            <TabsContent value="exact" className="pt-4">
               <p className="text-sm text-muted-foreground">Enter exact amounts</p>
-              <SplitSelector type="exact" amount={parseFloat(amountValue) || 0} participants={participants} paidByUserId={paidByUserId} onSplitsChange={setSplits} />
-            </div>
-          )}
+              <SplitSelector
+                type="exact"
+                amount={parseFloat(amountValue) || 0}
+                participants={participants}
+                paidByUserId={paidByUserId}
+                onSplitsChange={setSplits} // Use setSplits directly
+              />
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
 
-      <div className="flex justify-end pt-4">
+      <div className="flex justify-end">
         <Button type="submit" disabled={isSubmitting || participants.length <= 1}>
           {isSubmitting ? "Creating..." : "Create Expense"}
         </Button>

@@ -1,13 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export function CategorySelector({ categories, onChange }) {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -30,8 +24,7 @@ export function CategorySelector({ categories, onChange }) {
   // Set default value if not already set
   if (!selectedCategory && categories.length > 0) {
     // Find a default category or use the first one
-    const defaultCategory =
-      categories.find((cat) => cat.isDefault) || categories[0];
+    const defaultCategory = categories.find((cat) => cat.isDefault) || categories[0];
 
     // Set the default without triggering a re-render loop
     setTimeout(() => {

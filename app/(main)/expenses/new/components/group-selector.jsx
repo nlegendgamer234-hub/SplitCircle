@@ -5,22 +5,13 @@ import { useConvexQuery } from "@/hooks/use-convex-query";
 import { api } from "@/convex/_generated/api";
 import { BarLoader } from "react-spinners";
 import { Users } from "lucide-react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export function GroupSelector({ onChange }) {
   const [selectedGroupId, setSelectedGroupId] = useState("");
 
   // Single query to get all data we need
-  const { data, isLoading } = useConvexQuery(
-    api.groups.getGroupOrMembers,
-    selectedGroupId ? { groupId: selectedGroupId } : {}
-  );
+  const { data, isLoading } = useConvexQuery(api.groups.getGroupOrMembers, selectedGroupId ? { groupId: selectedGroupId } : {});
 
   // When group data changes, notify parent
   useEffect(() => {
@@ -38,11 +29,7 @@ export function GroupSelector({ onChange }) {
   }
 
   if (!data?.groups || data.groups.length === 0) {
-    return (
-      <div className="text-sm text-amber-600 p-2 bg-amber-50 rounded-md">
-        You need to create a group first before adding a group expense.
-      </div>
-    );
+    return <div className="text-sm text-amber-600 p-2 bg-amber-50 rounded-md">You need to create a group first before adding a group expense.</div>;
   }
 
   return (
@@ -59,9 +46,7 @@ export function GroupSelector({ onChange }) {
                   <Users className="h-3 w-3 text-primary" />
                 </div>
                 <span>{group.name}</span>
-                <span className="text-xs text-muted-foreground">
-                  ({group.memberCount} members)
-                </span>
+                <span className="text-xs text-muted-foreground">({group.memberCount} members)</span>
               </div>
             </SelectItem>
           ))}
