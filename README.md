@@ -35,12 +35,12 @@ A modern, full-stack expense-sharing web application built with Next.js, Convex,
 
 | Member Name | Role | Primary Contributions |
 | :--- | :--- | :--- |
-| **[Your Name]** | Lead Developer | Full-stack architecture, Next.js page routing, split logic calculations, UI bug fixes, and Convex backend integration. |
-| **[Teammate 1 Name]** | Frontend Developer | UI layout design, Tailwind styling, form controls, and responsive component integration. |
-| **[Teammate 2 Name]** | Backend Developer | Convex schema design, database query optimizations, and Clerk authentication setup. |
-| **[Teammate 3 Name]** | QA & Documentation | Form validation implementation, testing split edge-cases, and project documentation. |
+| **[Nitin Pathania]** | Lead Developer | Full-stack architecture, Next.js page routing, split logic calculations, UI bug fixes, and Convex backend integration. |
+| **[Nithish Prakash]** | Frontend Developer | UI layout design, Tailwind styling, form controls, and responsive component integration. |
+| **[Nilabh Singha]** | Backend Developer | Convex schema design, database query optimizations, and Clerk authentication setup. |
+| **[Nehal.P]** | QA & Documentation | Form validation implementation, testing split edge-cases, and project documentation. |
+| **[Bhargava R]** | UI/UX & State Manager | Toast notifications (`sonner`), modal integrations, error handling logic, and state management optimization. |
 
-*(Note: Replace bracketed names and roles above with your actual team member details).*
 
 ---
 
