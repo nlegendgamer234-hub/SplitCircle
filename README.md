@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💸 SplitExpense
 
-## Getting Started
+A modern, full-stack expense-sharing web application built with Next.js, Convex, and Clerk. SplitExpense enables users to easily create individual or group expenses, divide bills using dynamic calculation methods, track balances, and manage settlements in real-time.
 
-First, run the development server:
+> **Project Developed at:** S.N. Patel Institute of Technology & Research Centre (SNPITRC) / S.N. Patel Secondary & Higher Secondary School Campus (SNPSU)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Key Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- 👥 **Individual & Group Expenses:** Split costs 1-on-1 with a friend or seamlessly manage shared expenses across custom groups.
+- 🧮 **Flexible Split Types:**
+  - **Equal:** Splits expenses evenly among selected participants.
+  - **Percentage:** Dynamically calculates amounts based on custom percentage inputs.
+  - **Exact Amounts:** Allows specific dollar/currency allocations per individual.
+- 📅 **Interactive Date & Category Selectors:** Categorize transactions and pick custom dates with built-in validation.
+- 🔒 **Secure Authentication:** User sign-in and session management powered by Clerk.
+- ⚡ **Real-Time Data Sync:** Instant state updates backed by Convex database queries and mutations.
+- 🎨 **Responsive UI:** Styled with Tailwind CSS, Lucide Icons, and accessible UI primitives with theme support.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🛠️ Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Framework:** [Next.js](https://nextjs.org/) (App Router, Turbopack)
+- **Backend & Database:** [Convex](https://www.convex.dev/)
+- **Authentication:** [Clerk](https://clerk.com/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/) & [shadcn/ui](https://ui.shadcn.com/)
+- **Form Handling & Validation:** `react-hook-form` + `zod`
+- **Icons & Utilities:** `lucide-react`, `date-fns`, `sonner`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 👥 Team Members & Contributions
 
-## Deploy on Vercel
+| Member Name | Role | Primary Contributions |
+| :--- | :--- | :--- |
+| **[Your Name]** | Lead Developer | Full-stack architecture, Next.js page routing, split logic calculations, UI bug fixes, and Convex backend integration. |
+| **[Teammate 1 Name]** | Frontend Developer | UI layout design, Tailwind styling, form controls, and responsive component integration. |
+| **[Teammate 2 Name]** | Backend Developer | Convex schema design, database query optimizations, and Clerk authentication setup. |
+| **[Teammate 3 Name]** | QA & Documentation | Form validation implementation, testing split edge-cases, and project documentation. |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+*(Note: Replace bracketed names and roles above with your actual team member details).*
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Ensure you have the following installed on your local machine:
+- **Node.js** (v18.x or higher recommended)
+- **npm**, **pnpm**, or **yarn**
+
+---
+
+### Local Setup Instructions
+
+1. **Clone the Repository:**
+   ```bash
+   git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+   cd your-repo-name
