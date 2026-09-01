@@ -129,4 +129,4 @@ Splitting shared expenses among friends, roommates, or a trip group usually mean
 
 ## 🏛️ Academic Context
 
-Sapthagiri NPS University**.
+Sapthagiri NPS University.
